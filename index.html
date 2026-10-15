@@ -18,9 +18,7 @@
       --primary-soft: #eff6ff;
       --danger: #ef4444;
       --card-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
-      --dock-bg: rgba(255, 255, 255, 0.9);
-      --skeleton-start: #e2e8f0;
-      --skeleton-mid: #f1f5f9;
+      --dock-bg: rgba(255, 255, 255, 0.96);
     }
 
     [data-theme="dark"] {
@@ -34,24 +32,22 @@
       --primary: #3b82f6;
       --primary-hover: #60a5fa;
       --primary-soft: rgba(59, 130, 246, 0.15);
-      --danger: #f87171;
+      --danger: #ef4444;
       --card-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
-      --dock-bg: rgba(17, 24, 39, 0.92);
-      --skeleton-start: #1f2937;
-      --skeleton-mid: #374151;
+      --dock-bg: rgba(17, 24, 39, 0.96);
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
 
     body {
       background-color: var(--bg);
       color: var(--text-main);
-      padding: 20px 14px 120px 14px;
+      padding: 18px 12px 190px 12px;
       transition: background-color 0.25s ease, color 0.25s ease;
     }
 
@@ -60,20 +56,19 @@
       margin: 0 auto;
     }
 
-    /* Header */
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 22px;
+      margin-bottom: 18px;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 10px;
     }
 
     .brand-wrap {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
     .live-dot {
@@ -81,186 +76,105 @@
       height: 12px;
       background: #ef4444;
       border-radius: 50%;
-      position: relative;
-      flex-shrink: 0;
-    }
-
-    .live-dot::after {
-      content: '';
-      position: absolute;
-      inset: -4px;
-      border-radius: 50%;
-      border: 2px solid #ef4444;
-      animation: ping 1.5s infinite ease-out;
-    }
-
-    @keyframes ping {
-      0% { transform: scale(0.8); opacity: 1; }
-      100% { transform: scale(2); opacity: 0; }
+      box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.2);
     }
 
     header h1 {
-      font-size: 1.65rem;
+      font-size: 1.45rem;
       font-weight: 800;
-      letter-spacing: -0.02em;
-      color: var(--text-main);
     }
 
     header p {
       color: var(--text-muted);
-      font-size: 0.88rem;
-      margin-top: 2px;
-    }
-
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      font-size: 0.82rem;
     }
 
     .theme-btn {
       background: var(--surface);
       border: 1px solid var(--border);
       color: var(--text-main);
-      padding: 8px 12px;
-      border-radius: 10px;
+      padding: 7px 12px;
+      border-radius: 8px;
       cursor: pointer;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      box-shadow: var(--card-shadow);
     }
 
-    /* Controls Panel */
     .controls-panel {
       background: var(--surface);
-      padding: 16px;
+      padding: 14px;
       border-radius: 14px;
       border: 1px solid var(--border);
       box-shadow: var(--card-shadow);
-      margin-bottom: 22px;
+      margin-bottom: 18px;
       display: flex;
       flex-direction: column;
-      gap: 14px;
-    }
-
-    .control-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
 
     .btn-group {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
-      width: 100%;
+      gap: 6px;
     }
 
     .btn-chip {
-      padding: 8px 15px;
+      padding: 7px 13px;
       border: 1px solid var(--border);
       background: var(--surface-hover);
       border-radius: 999px;
-      font-size: 0.83rem;
+      font-size: 0.8rem;
       font-weight: 600;
       color: var(--text-muted);
       cursor: pointer;
-      transition: all 0.15s ease;
-    }
-
-    .btn-chip:hover {
-      border-color: var(--primary);
-      color: var(--text-main);
     }
 
     .btn-chip.active {
       background: var(--primary);
       color: #ffffff;
       border-color: var(--primary);
-      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.28);
     }
 
     .search-row {
       display: flex;
-      width: 100%;
       gap: 8px;
     }
 
-    .search-input-wrap {
-      position: relative;
+    .search-row input {
       flex: 1;
-      display: flex;
-      align-items: center;
-    }
-
-    .search-input-wrap input {
-      width: 100%;
-      padding: 10px 34px 10px 14px;
+      padding: 10px 12px;
       border: 1px solid var(--border);
       background: var(--bg);
       color: var(--text-main);
-      border-radius: 10px;
-      font-size: 0.9rem;
+      border-radius: 8px;
+      font-size: 0.88rem;
       outline: none;
-      transition: border-color 0.2s;
-    }
-
-    .search-input-wrap input:focus {
-      border-color: var(--primary);
-    }
-
-    .clear-search {
-      position: absolute;
-      right: 10px;
-      background: none;
-      border: none;
-      color: var(--text-light);
-      cursor: pointer;
-      font-size: 1rem;
-      display: none;
     }
 
     .btn-search {
-      padding: 10px 20px;
+      padding: 10px 16px;
       background: var(--primary);
       color: #ffffff;
       border: none;
-      border-radius: 10px;
+      border-radius: 8px;
       font-weight: 600;
-      font-size: 0.88rem;
       cursor: pointer;
-      transition: background 0.15s;
     }
 
-    .btn-search:hover {
-      background: var(--primary-hover);
-    }
-
-    /* News Grid & Cards */
     .news-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 18px;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 16px;
     }
 
     .card {
       background: var(--surface);
-      border-radius: 14px;
+      border-radius: 12px;
       overflow: hidden;
       box-shadow: var(--card-shadow);
       display: flex;
       flex-direction: column;
       border: 2px solid var(--border);
-      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-      position: relative;
-    }
-
-    .card:hover {
-      transform: translateY(-2px);
     }
 
     .card.playing {
@@ -269,22 +183,16 @@
     }
 
     .card-thumb-wrap {
-      position: relative;
       width: 100%;
-      height: 170px;
-      background: linear-gradient(135deg, #1e293b, #334155);
-      overflow: hidden;
+      height: 160px;
+      background: #1e293b;
+      position: relative;
     }
 
     .card-thumb-wrap img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.3s ease;
-    }
-
-    .card:hover .card-thumb-wrap img {
-      transform: scale(1.03);
     }
 
     .fallback-thumb {
@@ -294,35 +202,14 @@
       align-items: center;
       justify-content: center;
       color: #94a3b8;
-      font-size: 0.85rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
-    }
-
-    .now-playing-badge {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: var(--primary);
-      color: #fff;
-      font-size: 0.72rem;
+      font-size: 0.82rem;
       font-weight: 700;
-      padding: 4px 10px;
-      border-radius: 999px;
-      display: none;
-      align-items: center;
-      gap: 5px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    }
-
-    .card.playing .now-playing-badge {
-      display: inline-flex;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, #0f172a, #1e3a8a);
     }
 
     .card-body {
-      padding: 16px;
+      padding: 14px;
       display: flex;
       flex-direction: column;
       flex: 1;
@@ -331,280 +218,178 @@
     .card-meta {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      margin-bottom: 8px;
-      gap: 8px;
+      margin-bottom: 6px;
+      font-size: 0.74rem;
     }
 
     .source-tag {
-      font-size: 0.72rem;
       font-weight: 700;
       color: var(--primary);
-      background: var(--primary-soft);
-      padding: 3px 8px;
-      border-radius: 6px;
       text-transform: uppercase;
-      letter-spacing: 0.02em;
-      max-width: 65%;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
 
     .card-date {
-      font-size: 0.75rem;
       color: var(--text-light);
-      white-space: nowrap;
     }
 
     .card-title {
-      font-size: 1rem;
+      font-size: 0.96rem;
       font-weight: 700;
-      color: var(--text-main);
-      line-height: 1.4;
+      line-height: 1.38;
       margin-bottom: 8px;
     }
 
     .card-desc {
-      font-size: 0.86rem;
+      font-size: 0.84rem;
       color: var(--text-muted);
-      line-height: 1.5;
-      margin-bottom: 14px;
+      line-height: 1.45;
+      margin-bottom: 12px;
       flex: 1;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
     }
 
     .card-footer {
       border-top: 1px solid var(--border);
-      padding-top: 12px;
+      padding-top: 10px;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
     .btn-card-listen {
-      background: var(--surface-hover);
-      border: 1px solid var(--border);
-      border-radius: 8px;
+      background: var(--primary-soft);
+      border: 1px solid var(--primary);
+      border-radius: 6px;
       padding: 6px 12px;
       font-size: 0.8rem;
       cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-weight: 600;
-      color: var(--text-main);
-      transition: all 0.15s;
+      font-weight: 700;
+      color: var(--primary);
     }
 
-    .btn-card-listen:hover,
     .card.playing .btn-card-listen {
-      background: var(--primary);
-      color: #ffffff;
-      border-color: var(--primary);
+      background: var(--danger);
+      border-color: var(--danger);
+      color: #fff;
     }
 
     .read-more {
       color: var(--primary);
       text-decoration: none;
       font-weight: 600;
-      font-size: 0.84rem;
+      font-size: 0.82rem;
     }
-
-    .read-more:hover {
-      text-decoration: underline;
-    }
-
-    /* Skeleton Loader */
-    .skeleton-card {
-      background: var(--surface);
-      border-radius: 14px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      padding-bottom: 16px;
-    }
-
-    .shimmer {
-      background: linear-gradient(90deg, var(--skeleton-start) 25%, var(--skeleton-mid) 50%, var(--skeleton-start) 75%);
-      background-size: 200% 100%;
-      animation: shimmer 1.4s infinite;
-    }
-
-    @keyframes shimmer {
-      0% { background-position: 200% 0; }
-      100% { background-position: -200% 0; }
-    }
-
-    .sk-img { height: 170px; width: 100%; }
-    .sk-line { height: 14px; border-radius: 6px; margin: 12px 16px 0; }
-    .sk-w40 { width: 40%; }
-    .sk-w90 { width: 88%; height: 18px; }
-    .sk-w75 { width: 75%; }
 
     .status-msg {
       text-align: center;
-      padding: 48px 16px;
+      padding: 40px 14px;
       color: var(--text-muted);
-      font-size: 0.95rem;
       grid-column: 1 / -1;
       background: var(--surface);
-      border-radius: 14px;
+      border-radius: 12px;
       border: 1px solid var(--border);
     }
 
-    /* Sticky Bottom Audio Anchor Bar */
+    /* Sticky Bottom Audio Bar */
     .audio-dock {
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
       background: var(--dock-bg);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
       border-top: 1px solid var(--border);
-      padding: 12px 16px;
+      padding: 10px 14px;
       z-index: 100;
-      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.1);
     }
 
     .dock-inner {
       max-width: 1080px;
       margin: 0 auto;
       display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .dock-top {
+      display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 14px;
-      flex-wrap: wrap;
+      gap: 10px;
     }
 
-    .dock-info {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      min-width: 220px;
+    .dock-status-box {
+      overflow: hidden;
       flex: 1;
-      overflow: hidden;
-    }
-
-    .anchor-avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      background: var(--primary-soft);
-      color: var(--primary);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      flex-shrink: 0;
-    }
-
-    .dock-text {
-      overflow: hidden;
     }
 
     .audio-status {
-      font-size: 0.78rem;
-      font-weight: 700;
+      font-size: 0.74rem;
+      font-weight: 800;
       color: var(--primary);
       text-transform: uppercase;
-      letter-spacing: 0.03em;
     }
 
     .now-playing-headline {
-      font-size: 0.88rem;
+      font-size: 0.84rem;
       font-weight: 600;
-      color: var(--text-main);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
-    .dock-controls {
+    .dock-buttons {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
+      flex-wrap: wrap;
     }
 
     .btn-briefing {
       background: var(--primary);
       color: #fff;
       border: none;
-      padding: 9px 16px;
-      border-radius: 10px;
-      font-size: 0.84rem;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 0.82rem;
       font-weight: 700;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      white-space: nowrap;
     }
 
-    .btn-briefing:hover {
-      background: var(--primary-hover);
-    }
-
-    .btn-icon {
-      background: var(--surface-hover);
-      border: 1px solid var(--border);
-      color: var(--text-main);
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 0.85rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .btn-icon:hover {
-      border-color: var(--primary);
-    }
-
-    .btn-stop {
+    .btn-stop-big {
       background: var(--danger);
       color: #fff;
       border: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-nav {
+      background: var(--surface-hover);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 7px 11px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-weight: 600;
     }
 
     .dock-settings {
       display: flex;
-      align-items: center;
       gap: 8px;
     }
 
     .select-pill {
-      padding: 7px 10px;
-      border-radius: 8px;
+      flex: 1;
+      padding: 6px 8px;
+      border-radius: 6px;
       border: 1px solid var(--border);
       background: var(--surface);
       color: var(--text-main);
-      font-size: 0.8rem;
-      outline: none;
-      max-width: 185px;
-    }
-
-    @media (max-width: 720px) {
-      .dock-inner {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 10px;
-      }
-      .dock-controls, .dock-settings {
-        justify-content: space-between;
-      }
-      .select-pill {
-        flex: 1;
-        max-width: none;
-      }
-      body {
-        padding-bottom: 185px;
-      }
+      font-size: 0.78rem;
     }
   </style>
 </head>
@@ -613,189 +398,99 @@
 <div class="container">
   <header>
     <div class="brand-wrap">
-      <div class="live-dot" title="Live Feed"></div>
+      <div class="live-dot"></div>
       <div>
         <h1>India & World Live News Anchor</h1>
-        <p>Real-time briefings with interactive queue & speech synthesis</p>
+        <p>Studio Human Voice Briefing & Real-Time News</p>
       </div>
     </div>
-    <div class="header-actions">
-      <button class="theme-btn" id="themeToggle" onclick="toggleTheme()">🌙 Dark Mode</button>
-    </div>
+    <button class="theme-btn" id="themeToggle" onclick="toggleTheme()">🌙 Dark Mode</button>
   </header>
 
   <div class="controls-panel">
-    <div class="control-row">
-      <div class="btn-group" id="categoryGroup">
-        <button class="btn-chip active" data-cat="india">🇮🇳 All India</button>
-        <button class="btn-chip" data-cat="all">🌍 World</button>
-        <button class="btn-chip" data-cat="technology">💻 Tech</button>
-        <button class="btn-chip" data-cat="business">📈 Business</button>
-        <button class="btn-chip" data-cat="sports">🏏 Sports</button>
-        <button class="btn-chip" data-cat="entertainment">🎬 Entertainment</button>
-        <button class="btn-chip" data-cat="science">🔬 Science</button>
-        <button class="btn-chip" data-cat="health">🩺 Health</button>
-      </div>
+    <div class="btn-group" id="categoryGroup">
+      <button class="btn-chip active" data-cat="india">🇮🇳 All India</button>
+      <button class="btn-chip" data-cat="all">🌍 World</button>
+      <button class="btn-chip" data-cat="technology">💻 Tech</button>
+      <button class="btn-chip" data-cat="business">📈 Business</button>
+      <button class="btn-chip" data-cat="sports">🏏 Sports</button>
+      <button class="btn-chip" data-cat="entertainment">🎬 Entertainment</button>
+      <button class="btn-chip" data-cat="science">🔬 Science</button>
+      <button class="btn-chip" data-cat="health">🩺 Health</button>
     </div>
 
     <div class="search-row">
-      <div class="search-input-wrap">
-        <input type="text" id="searchInput" placeholder="Search topics (e.g. UPI, Cricket, AI, Economy)...">
-        <button class="clear-search" id="clearSearchBtn" onclick="clearSearch()" title="Clear search">✕</button>
-      </div>
+      <input type="text" id="searchInput" placeholder="Search topics (e.g. UPI, Cricket, AI, Economy)...">
       <button class="btn-search" onclick="triggerSearch()">Search</button>
     </div>
   </div>
 
-  <div class="news-grid" id="newsGrid"></div>
+  <div class="news-grid" id="newsGrid">
+    <div class="status-msg">Loading latest headlines...</div>
+  </div>
 </div>
 
-<!-- Sticky Bottom Broadcast Dock -->
+<!-- Sticky Bottom Audio Player -->
 <div class="audio-dock">
   <div class="dock-inner">
-    <div class="dock-info">
-      <div class="anchor-avatar">🎙</div>
-      <div class="dock-text">
-        <div class="audio-status" id="audioStatus">Audio Anchor Ready</div>
-        <div class="now-playing-headline" id="nowPlayingTitle">Tap "Play Top 5 Brief" or any article's Listen button</div>
+    <div class="dock-top">
+      <div class="dock-status-box">
+        <div class="audio-status" id="audioStatus">🎙 Studio Anchor Ready</div>
+        <div class="now-playing-headline" id="nowPlayingTitle">Tap "Play Top 5" or any Listen button</div>
+      </div>
+      <div class="dock-buttons">
+        <button class="btn-briefing" onclick="startBulletin()">▶ Play Top 5</button>
+        <button class="btn-nav" onclick="togglePauseResume()" id="pauseBtn">⏸ Pause</button>
+        <button class="btn-nav" onclick="playNext()">⏭ Next</button>
+        <button class="btn-stop-big" onclick="stopAudio()">⏹ Stop Audio</button>
       </div>
     </div>
 
-    <div class="dock-controls">
-      <button class="btn-briefing" onclick="startBulletin()">▶ Play Top 5 Brief</button>
-      <button class="btn-icon" onclick="playPrev()" title="Previous Headline">⏮</button>
-      <button class="btn-icon" id="pauseResumeBtn" onclick="togglePauseResume()" title="Pause / Resume">⏯</button>
-      <button class="btn-icon" onclick="playNext()" title="Next Headline">⏭</button>
-      <button class="btn-icon btn-stop" onclick="stopAudio()" title="Stop Audio">⏹</button>
-    </div>
-
     <div class="dock-settings">
-      <select id="speedSelect" class="select-pill" title="Playback Speed" onchange="updateSpeed(this.value)">
-        <option value="0.9">0.9x Calm</option>
-        <option value="1" selected>1.0x Normal</option>
-        <option value="1.15">1.15x Brisk</option>
-        <option value="1.35">1.35x Fast</option>
+      <select id="voiceAccent" class="select-pill" onchange="restartCurrentAudio()">
+        <option value="en-IN" selected>🇮🇳 Indian English Anchor (Human)</option>
+        <option value="en-GB">🇬🇧 BBC British Anchor (Human)</option>
+        <option value="en-US">🇺🇸 US News Anchor (Human)</option>
+        <option value="en-AU">🇦🇺 Australian Anchor (Human)</option>
       </select>
-      <select id="voiceSelect" class="select-pill" title="Select Voice Anchor"></select>
+      <select id="speedSelect" class="select-pill" onchange="updateSpeed(this.value)">
+        <option value="0.95">0.95x Calm</option>
+        <option value="1.05" selected>1.0x Normal Anchor</option>
+        <option value="1.2">1.2x Fast</option>
+      </select>
     </div>
   </div>
 </div>
 
 <script>
+  // Automatically uses your live Vercel server if you preview inside Acode!
+  const API_BASE = window.location.hostname.includes('vercel.app')
+    ? ''
+    : 'https://automatic-summaries-news.vercel.app';
+
   let activeCategory = 'india';
   let fetchedArticles = [];
   let fetchController = null;
 
-  // Queue & Speech State
-  const synth = window.speechSynthesis;
-  let englishVoices = [];
-  let selectedVoice = null;
-  let speechRate = 1.0;
+  // Real HTML5 Audio Player for Natural Human Voice
+  const audioPlayer = new Audio();
   let playQueue = [];
   let currentQueuePos = -1;
-  let isBulletinMode = false;
-
-  // Theme Initialization
-  function initTheme() {
-    const saved = localStorage.getItem('news_theme') || 'light';
-    document.documentElement.setAttribute('data-theme', saved);
-    updateThemeBtn(saved);
-  }
+  let sentenceChunks = [];
+  let currentChunkIndex = 0;
+  let playbackSpeed = 1.05;
+  let isPlaying = false;
 
   function toggleTheme() {
-    const current = document.documentElement.getAttribute('data-theme');
-    const next = current === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', next);
-    localStorage.setItem('news_theme', next);
-    updateThemeBtn(next);
+    const html = document.documentElement;
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    document.getElementById('themeToggle').innerText = next === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
   }
-
-  function updateThemeBtn(theme) {
-    const btn = document.getElementById('themeToggle');
-    btn.innerHTML = theme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
-  }
-
-  initTheme();
 
   function escapeHtml(str) {
     if (!str) return '';
-    return String(str)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#039;');
-  }
-
-  function sanitizeUrl(rawUrl) {
-    if (!rawUrl) return '#';
-    try {
-      const parsed = new URL(rawUrl, window.location.origin);
-      if (parsed.protocol === 'http:' || parsed.protocol === 'https:') {
-        return parsed.href;
-      }
-    } catch (_) {}
-    return '#';
-  }
-
-  function formatRelativeTime(dateString) {
-    if (!dateString) return '';
-    const date = new Date(dateString);
-    if (isNaN(date)) return '';
-    const diffMs = Date.now() - date.getTime();
-    const diffMins = Math.floor(diffMs / 60000);
-    if (diffMins < 1) return 'Just now';
-    if (diffMins < 60) return `${diffMins}m ago`;
-    const diffHrs = Math.floor(diffMins / 60);
-    if (diffHrs < 24) return `${diffHrs}h ago`;
-    return date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
-  }
-
-  function loadVoices() {
-    if (!synth) return;
-    const allVoices = synth.getVoices();
-    englishVoices = allVoices.filter(v => v.lang.startsWith('en'));
-    if (englishVoices.length === 0) return;
-
-    const selectEl = document.getElementById('voiceSelect');
-    selectEl.innerHTML = '';
-
-    const qualityKeywords = ['India', 'Natural', 'Online', 'Google', 'Siri', 'Samantha', 'Premium'];
-    englishVoices.sort((a, b) => {
-      const aIsIndia = a.lang === 'en-IN' ? 3 : 0;
-      const bIsIndia = b.lang === 'en-IN' ? 3 : 0;
-      const aScore = aIsIndia + (qualityKeywords.some(k => a.name.includes(k)) ? 2 : 0);
-      const bScore = bIsIndia + (qualityKeywords.some(k => b.name.includes(k)) ? 2 : 0);
-      return bScore - aScore;
-    });
-
-    englishVoices.forEach((voice, index) => {
-      const option = document.createElement('option');
-      option.value = index;
-      option.textContent = `${voice.name.replace(/Microsoft |Google /g, '')} (${voice.lang})`;
-      selectEl.appendChild(option);
-    });
-
-    selectedVoice = englishVoices[0];
-    selectEl.value = 0;
-    selectEl.onchange = (e) => {
-      selectedVoice = englishVoices[e.target.value];
-      if (currentQueuePos !== -1) {
-        playCurrentInQueue();
-      }
-    };
-  }
-
-  loadVoices();
-  if (synth && synth.onvoiceschanged !== undefined) {
-    synth.onvoiceschanged = loadVoices;
-  }
-
-  function updateSpeed(val) {
-    speechRate = parseFloat(val) || 1.0;
-    if (currentQueuePos !== -1) {
-      playCurrentInQueue();
-    }
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 
   function cleanText(txt) {
@@ -804,217 +499,251 @@
       .replace(/https?:\/\/\S+/gi, '')
       .replace(/<[^>]*>/g, '')
       .replace(/\[\+\d+\s+chars\]/g, '')
+      .replace(/\s+/g, ' ')
       .trim();
   }
 
-  function highlightActiveCard(articleIndex) {
+  // Split long text into natural <180 char phrases for seamless human voice streaming
+  function splitIntoChunks(text) {
+    const words = cleanText(text).split(' ');
+    const chunks = [];
+    let current = '';
+
+    for (const word of words) {
+      if ((current + ' ' + word).trim().length > 175) {
+        if (current) chunks.push(current.trim());
+        current = word;
+      } else {
+        current = (current + ' ' + word).trim();
+      }
+    }
+    if (current) chunks.push(current.trim());
+    return chunks;
+  }
+
+  function highlightCard(articleIdx) {
     document.querySelectorAll('.card').forEach((card, idx) => {
       const btn = card.querySelector('.btn-card-listen');
-      if (idx === articleIndex) {
+      if (idx === articleIdx) {
         card.classList.add('playing');
-        if (btn) btn.innerHTML = '🔊 Playing...';
+        if (btn) {
+          btn.innerText = '⏹ Stop';
+          btn.onclick = () => stopAudio();
+        }
         card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       } else {
         card.classList.remove('playing');
-        if (btn) btn.innerHTML = '🔊 Listen';
+        if (btn) {
+          btn.innerText = '🔊 Listen';
+          btn.onclick = () => readSingleArticle(idx);
+        }
       }
     });
   }
 
+  // INSTANT STOP FUNCTION
   function stopAudio() {
+    isPlaying = false;
     playQueue = [];
     currentQueuePos = -1;
-    isBulletinMode = false;
-    if (synth) synth.cancel();
-    highlightActiveCard(-1);
-    document.getElementById('audioStatus').innerText = "Audio Anchor Ready";
-    document.getElementById('nowPlayingTitle').innerText = "Playback stopped";
+    sentenceChunks = [];
+    currentChunkIndex = 0;
+
+    // Immediately stop HTML5 Audio & any fallback speech
+    audioPlayer.pause();
+    audioPlayer.removeAttribute('src');
+    if (window.speechSynthesis) window.speechSynthesis.cancel();
+
+    highlightCard(-1);
+    document.getElementById('audioStatus').innerText = "🎙 Studio Anchor Stopped";
+    document.getElementById('nowPlayingTitle').innerText = "Audio stopped.";
+    document.getElementById('pauseBtn').innerText = "⏸ Pause";
   }
 
   function togglePauseResume() {
-    if (!synth) return;
-    if (synth.speaking && !synth.paused) {
-      synth.pause();
-      document.getElementById('audioStatus').innerText = "⏸ Paused";
-    } else if (synth.paused) {
-      synth.resume();
-      document.getElementById('audioStatus').innerText = "🔊 Resumed Playback";
+    if (!isPlaying) return;
+    const pauseBtn = document.getElementById('pauseBtn');
+    if (!audioPlayer.paused) {
+      audioPlayer.pause();
+      pauseBtn.innerText = "▶ Resume";
+      document.getElementById('audioStatus').innerText = "⏸ Anchor Paused";
+    } else {
+      audioPlayer.play();
+      pauseBtn.innerText = "⏸ Pause";
+      document.getElementById('audioStatus').innerText = "🔊 Speaking Live...";
     }
   }
 
-  function playCurrentInQueue() {
-    if (!synth) {
-      alert("Speech synthesis is not supported in this browser.");
-      return;
+  function updateSpeed(val) {
+    playbackSpeed = parseFloat(val) || 1.05;
+    audioPlayer.playbackRate = playbackSpeed;
+  }
+
+  function restartCurrentAudio() {
+    if (isPlaying && currentQueuePos !== -1) {
+      playArticleAtQueuePos();
     }
+  }
 
-    if (currentQueuePos < 0 || currentQueuePos >= playQueue.length) {
-      stopAudio();
-      document.getElementById('nowPlayingTitle').innerText = "Finished news briefing.";
-      return;
-    }
+  function playNextChunk() {
+    if (!isPlaying) return;
 
-    synth.cancel();
-
-    const articleIndex = playQueue[currentQueuePos];
-    const art = fetchedArticles[articleIndex];
-    if (!art) return;
-
-    highlightActiveCard(articleIndex);
-
-    const prefix = isBulletinMode ? `Story ${currentQueuePos + 1} of ${playQueue.length}. ` : '';
-    const speechBody = `${prefix}${cleanText(art.title)}. ${cleanText(art.description || '')}`;
-
-    const utterance = new SpeechSynthesisUtterance(speechBody);
-    if (selectedVoice) {
-      utterance.voice = selectedVoice;
-      utterance.lang = selectedVoice.lang;
-    } else {
-      utterance.lang = 'en-IN';
-    }
-
-    utterance.rate = speechRate;
-    utterance.pitch = 1.0;
-
-    utterance.onstart = () => {
-      const statusLabel = isBulletinMode
-        ? `🔊 Briefing (${currentQueuePos + 1}/${playQueue.length})`
-        : `🔊 Reading Story`;
-      document.getElementById('audioStatus').innerText = statusLabel;
-      document.getElementById('nowPlayingTitle').innerText = art.title;
-    };
-
-    utterance.onend = () => {
-      if (currentQueuePos !== -1 && currentQueuePos + 1 < playQueue.length) {
+    if (currentChunkIndex >= sentenceChunks.length) {
+      // Move to next article in queue
+      if (currentQueuePos + 1 < playQueue.length) {
         currentQueuePos++;
-        playCurrentInQueue();
+        playArticleAtQueuePos();
       } else {
         stopAudio();
-        document.getElementById('nowPlayingTitle').innerText = "Briefing complete";
+        document.getElementById('audioStatus').innerText = "✅ Briefing Complete";
+        document.getElementById('nowPlayingTitle').innerText = "Finished reading headlines.";
       }
-    };
+      return;
+    }
 
-    utterance.onerror = (e) => {
-      if (e.error === 'interrupted' || e.error === 'canceled') return;
+    const chunkText = sentenceChunks[currentChunkIndex];
+    const accent = document.getElementById('voiceAccent').value || 'en-IN';
+
+    // Stream human voice MP3 from /api/tts
+    audioPlayer.src = `${API_BASE}/api/tts?tl=${encodeURIComponent(accent)}&text=${encodeURIComponent(chunkText)}`;
+    audioPlayer.playbackRate = playbackSpeed;
+
+    audioPlayer.play().catch(() => {
+      // Fallback if /api/tts isn't deployed to Vercel yet
+      fallbackVoice(chunkText, accent);
+    });
+  }
+
+  audioPlayer.onended = () => {
+    if (!isPlaying) return;
+    currentChunkIndex++;
+    playNextChunk();
+  };
+
+  audioPlayer.onerror = () => {
+    if (!isPlaying) return;
+    const chunkText = sentenceChunks[currentChunkIndex];
+    const accent = document.getElementById('voiceAccent').value || 'en-IN';
+    fallbackVoice(chunkText, accent);
+  };
+
+  // Fallback only if user hasn't uploaded api/tts.js yet
+  function fallbackVoice(text, lang) {
+    if (!window.speechSynthesis) {
       stopAudio();
+      return;
+    }
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = lang;
+    u.rate = 1.0;
+    u.onend = () => {
+      if (!isPlaying) return;
+      currentChunkIndex++;
+      playNextChunk();
     };
+    window.speechSynthesis.speak(u);
+  }
 
-    synth.speak(utterance);
+  function playArticleAtQueuePos() {
+    const artIdx = playQueue[currentQueuePos];
+    const art = fetchedArticles[artIdx];
+    if (!art) {
+      stopAudio();
+      return;
+    }
+
+    isPlaying = true;
+    highlightCard(artIdx);
+
+    const fullScript = `${art.title}. ${art.description || ''}`;
+    sentenceChunks = splitIntoChunks(fullScript);
+    currentChunkIndex = 0;
+
+    document.getElementById('audioStatus').innerText =
+      playQueue.length > 1 ? `🔊 Human Anchor (${currentQueuePos + 1}/${playQueue.length})` : `🔊 Human Anchor Live`;
+    document.getElementById('nowPlayingTitle').innerText = art.title;
+    document.getElementById('pauseBtn').innerText = "⏸ Pause";
+
+    playNextChunk();
+  }
+
+  function readSingleArticle(idx) {
+    stopAudio();
+    playQueue = [idx];
+    currentQueuePos = 0;
+    playArticleAtQueuePos();
   }
 
   function startBulletin() {
-    if (!fetchedArticles.length) {
-      alert("No news articles loaded yet.");
-      return;
-    }
-    const count = Math.min(5, fetchedArticles.length);
-    playQueue = Array.from({ length: count }, (_, i) => i);
+    if (!fetchedArticles.length) return;
+    stopAudio();
+    const limit = Math.min(5, fetchedArticles.length);
+    playQueue = Array.from({ length: limit }, (_, i) => i);
     currentQueuePos = 0;
-    isBulletinMode = true;
-    playCurrentInQueue();
-  }
-
-  function readSingleArticle(index) {
-    if (!fetchedArticles[index]) return;
-    playQueue = [index];
-    currentQueuePos = 0;
-    isBulletinMode = false;
-    playCurrentInQueue();
+    playArticleAtQueuePos();
   }
 
   function playNext() {
     if (!fetchedArticles.length) return;
-    if (currentQueuePos !== -1 && currentQueuePos + 1 < playQueue.length) {
+    if (isPlaying && currentQueuePos + 1 < playQueue.length) {
       currentQueuePos++;
-      playCurrentInQueue();
-    } else if (playQueue.length === 1) {
-      const nextIdx = (playQueue[0] + 1) % fetchedArticles.length;
+      playArticleAtQueuePos();
+    } else {
+      const nextIdx = playQueue.length ? (playQueue[0] + 1) % fetchedArticles.length : 0;
       readSingleArticle(nextIdx);
     }
   }
 
-  function playPrev() {
-    if (!fetchedArticles.length) return;
-    if (currentQueuePos > 0) {
-      currentQueuePos--;
-      playCurrentInQueue();
-    } else if (playQueue.length === 1) {
-      const prevIdx = (playQueue[0] - 1 + fetchedArticles.length) % fetchedArticles.length;
-      readSingleArticle(prevIdx);
-    }
-  }
-
-  function renderSkeletons() {
-    const grid = document.getElementById('newsGrid');
-    grid.innerHTML = Array.from({ length: 6 }).map(() => `
-      <div class="skeleton-card">
-        <div class="sk-img shimmer"></div>
-        <div class="sk-line sk-w40 shimmer"></div>
-        <div class="sk-line sk-w90 shimmer"></div>
-        <div class="sk-line sk-w75 shimmer"></div>
-      </div>
-    `).join('');
-  }
-
   async function fetchNews(query = '') {
     stopAudio();
-
-    if (fetchController) {
-      fetchController.abort();
-    }
+    if (fetchController) fetchController.abort();
     fetchController = new AbortController();
 
     const grid = document.getElementById('newsGrid');
-    renderSkeletons();
+    grid.innerHTML = '<div class="status-msg">Fetching latest live headlines...</div>';
 
-    let url = `/api/news?category=${encodeURIComponent(activeCategory)}`;
-    if (query) {
-      url += `&q=${encodeURIComponent(query)}`;
-    }
+    let url = `${API_BASE}/api/news?category=${encodeURIComponent(activeCategory)}`;
+    if (query) url += `&q=${encodeURIComponent(query)}`;
 
     try {
-      const response = await fetch(url, { signal: fetchController.signal });
-      const data = await response.json();
+      const res = await fetch(url, { signal: fetchController.signal });
+      const data = await res.json();
 
-      if (!response.ok || data.status !== "ok" || !data.articles || data.articles.length === 0) {
-        grid.innerHTML = `<div class="status-msg">${escapeHtml(data.message) || 'No articles found for this topic.'}</div>`;
+      if (!res.ok || data.status !== "ok" || !data.articles?.length) {
+        grid.innerHTML = `<div class="status-msg">${escapeHtml(data.message) || 'No articles found.'}</div>`;
         fetchedArticles = [];
         return;
       }
 
       fetchedArticles = data.articles.filter(a => a.title && !a.title.includes('[Removed]'));
-
       grid.innerHTML = '';
-      fetchedArticles.forEach((article, idx) => {
-        const relativeDate = formatRelativeTime(article.publishedAt);
-        const safeImg = sanitizeUrl(article.urlToImage);
-        const safeLink = sanitizeUrl(article.url);
-        const safeSource = escapeHtml(article.source?.name || 'Live News');
-        const safeTitle = escapeHtml(article.title);
-        const safeDesc = escapeHtml(article.description || 'Tap Read Full Story to view complete coverage from the publisher.');
 
-        const hasValidImage = article.urlToImage && safeImg !== '#';
+      fetchedArticles.forEach((art, idx) => {
+        const safeSource = escapeHtml(art.source?.name || 'News');
+        const safeTitle = escapeHtml(art.title);
+        const safeDesc = escapeHtml(art.description || 'Tap Full Story for complete coverage.');
+        const dateStr = art.publishedAt ? new Date(art.publishedAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) : '';
 
-        const card = document.createElement('article');
+        const card = document.createElement('div');
         card.className = 'card';
         card.innerHTML = `
           <div class="card-thumb-wrap">
-            ${hasValidImage
-              ? `<img src="${safeImg}" alt="" loading="lazy" onerror="this.outerHTML='<div class=\\'fallback-thumb\\'>${safeSource}</div>'">`
+            ${art.urlToImage
+              ? `<img src="${escapeHtml(art.urlToImage)}" alt="" loading="lazy" onerror="this.outerHTML='<div class=\\'fallback-thumb\\'>${safeSource}</div>'">`
               : `<div class="fallback-thumb">${safeSource}</div>`
             }
-            <span class="now-playing-badge">🔊 Now Speaking</span>
           </div>
           <div class="card-body">
             <div class="card-meta">
               <span class="source-tag">${safeSource}</span>
-              <span class="card-date">${relativeDate}</span>
+              <span class="card-date">${dateStr}</span>
             </div>
             <h2 class="card-title">${safeTitle}</h2>
             <p class="card-desc">${safeDesc}</p>
             <div class="card-footer">
               <button class="btn-card-listen" onclick="readSingleArticle(${idx})">🔊 Listen</button>
-              <a href="${safeLink}" class="read-more" target="_blank" rel="noopener noreferrer">Full Story &rarr;</a>
+              <a href="${escapeHtml(art.url)}" class="read-more" target="_blank" rel="noopener">Full Story &rarr;</a>
             </div>
           </div>
         `;
@@ -1022,43 +751,23 @@
       });
     } catch (err) {
       if (err.name === 'AbortError') return;
-      grid.innerHTML = '<div class="status-msg" style="color: var(--danger);">Unable to load headlines right now. Please check your connection or API limit.</div>';
+      grid.innerHTML = '<div class="status-msg" style="color: #ef4444;">Unable to load headlines. Make sure you push api/news.js to Vercel!</div>';
     }
   }
 
-  // Category & Search Event Listeners
   document.getElementById('categoryGroup').addEventListener('click', (e) => {
     const btn = e.target.closest('button');
     if (!btn) return;
-
     document.querySelectorAll('#categoryGroup button').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     activeCategory = btn.dataset.cat;
     document.getElementById('searchInput').value = '';
-    document.getElementById('clearSearchBtn').style.display = 'none';
     fetchNews();
-  });
-
-  const searchInputEl = document.getElementById('searchInput');
-  const clearBtnEl = document.getElementById('clearSearchBtn');
-
-  searchInputEl.addEventListener('input', () => {
-    clearBtnEl.style.display = searchInputEl.value.trim() ? 'block' : 'none';
-  });
-
-  searchInputEl.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') triggerSearch();
   });
 
   function triggerSearch() {
-    const query = searchInputEl.value.trim();
-    if (query) fetchNews(query);
-  }
-
-  function clearSearch() {
-    searchInputEl.value = '';
-    clearBtnEl.style.display = 'none';
-    fetchNews();
+    const q = document.getElementById('searchInput').value.trim();
+    if (q) fetchNews(q);
   }
 
   fetchNews();
