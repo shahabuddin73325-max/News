@@ -47,7 +47,7 @@
     body {
       background-color: var(--bg);
       color: var(--text-main);
-      padding: 18px 12px 190px 12px;
+      padding: 18px 12px 195px 12px;
       transition: background-color 0.25s ease, color 0.25s ease;
     }
 
@@ -135,8 +135,29 @@
       border-color: var(--primary);
     }
 
+    .filter-search-grid {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .channel-select {
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text-main);
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      outline: none;
+      min-width: 210px;
+      cursor: pointer;
+    }
+
     .search-row {
       display: flex;
+      flex: 1;
+      min-width: 240px;
       gap: 8px;
     }
 
@@ -402,7 +423,7 @@
       <div class="live-dot"></div>
       <div>
         <h1>India & World Live News Anchor</h1>
-        <p>Studio Human Voice Briefing & Real-Time News</p>
+        <p>National & International Channels with Studio Human Voice</p>
       </div>
     </div>
     <button class="theme-btn" id="themeToggle" onclick="toggleTheme()">🌙 Dark Mode</button>
@@ -410,8 +431,8 @@
 
   <div class="controls-panel">
     <div class="btn-group" id="categoryGroup">
-      <button class="btn-chip active" data-cat="india">🇮🇳 All India</button>
-      <button class="btn-chip" data-cat="all">🌍 World</button>
+      <button class="btn-chip active" data-cat="india">🇮🇳 All India & World Mix</button>
+      <button class="btn-chip" data-cat="all">🌍 Global Top Headlines</button>
       <button class="btn-chip" data-cat="technology">💻 Tech</button>
       <button class="btn-chip" data-cat="business">📈 Business</button>
       <button class="btn-chip" data-cat="sports">🏏 Sports</button>
@@ -420,9 +441,35 @@
       <button class="btn-chip" data-cat="health">🩺 Health</button>
     </div>
 
-    <div class="search-row">
-      <input type="text" id="searchInput" placeholder="Search topics (e.g. UPI, Cricket, AI, Economy)...">
-      <button class="btn-search" onclick="triggerSearch()">Search</button>
+    <!-- Direct Channel Picker + Search Box -->
+    <div class="filter-search-grid">
+      <select id="channelSelect" class="channel-select" onchange="onChannelChange()">
+        <option value="">📺 All News Channels (National + Intl)</option>
+        <optgroup label="🇮🇳 Indian National Channels">
+          <option value="indianexpress.com">📰 The Indian Express</option>
+          <option value="thehindu.com">📰 The Hindu</option>
+          <option value="ndtv.com">📺 NDTV News</option>
+          <option value="timesofindia.indiatimes.com">📰 Times of India</option>
+          <option value="hindustantimes.com">📰 Hindustan Times</option>
+          <option value="livemint.com">📈 LiveMint</option>
+          <option value="moneycontrol.com">💹 Moneycontrol</option>
+          <option value="indiatoday.in">📺 India Today</option>
+        </optgroup>
+        <optgroup label="🌍 International Channels">
+          <option value="bbc.co.uk,bbc.com">🇬🇧 BBC News</option>
+          <option value="reuters.com">🌐 Reuters</option>
+          <option value="aljazeera.com">🌍 Al Jazeera</option>
+          <option value="cnn.com">🇺🇸 CNN</option>
+          <option value="apnews.com">🌐 Associated Press (AP)</option>
+          <option value="theguardian.com">🇬🇧 The Guardian</option>
+          <option value="techcrunch.com">💻 TechCrunch</option>
+        </optgroup>
+      </select>
+
+      <div class="search-row">
+        <input type="text" id="searchInput" placeholder="Search topic OR channel (e.g. Indian Express, BBC, Cricket, UPI)...">
+        <button class="btn-search" onclick="triggerSearch()">Search</button>
+      </div>
     </div>
   </div>
 
@@ -647,7 +694,8 @@
     isPlaying = true;
     highlightCard(artIdx);
 
-    const fullScript = `${art.title}. ${art.description || ''}`;
+    const channelName = art.source?.name ? `From ${art.source.name}. ` : '';
+    const fullScript = `${channelName}${art.title}. ${art.description || ''}`;
     sentenceChunks = splitIntoChunks(fullScript);
     currentChunkIndex = 0;
 
@@ -691,10 +739,12 @@
     if (fetchController) fetchController.abort();
     fetchController = new AbortController();
 
+    const selectedChannel = document.getElementById('channelSelect').value;
     const grid = document.getElementById('newsGrid');
     grid.innerHTML = '<div class="status-msg">Fetching latest live headlines...</div>';
 
     let url = `${API_BASE}/api/news?category=${encodeURIComponent(activeCategory)}`;
+    if (selectedChannel) url += `&channel=${encodeURIComponent(selectedChannel)}`;
     if (query) url += `&q=${encodeURIComponent(query)}`;
 
     try {
@@ -702,7 +752,7 @@
       const data = await res.json();
 
       if (!res.ok || data.status !== "ok" || !data.articles?.length) {
-        grid.innerHTML = `<div class="status-msg">${escapeHtml(data.message) || 'No articles found.'}</div>`;
+        grid.innerHTML = `<div class="status-msg">${escapeHtml(data.message) || 'No articles found for this channel or topic.'}</div>`;
         fetchedArticles = [];
         return;
       }
@@ -752,13 +802,16 @@
     document.querySelectorAll('#categoryGroup button').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     activeCategory = btn.dataset.cat;
-    document.getElementById('searchInput').value = '';
-    fetchNews();
+    fetchNews(document.getElementById('searchInput').value.trim());
   });
+
+  function onChannelChange() {
+    fetchNews(document.getElementById('searchInput').value.trim());
+  }
 
   function triggerSearch() {
     const q = document.getElementById('searchInput').value.trim();
-    if (q) fetchNews(q);
+    fetchNews(q);
   }
 
   document.getElementById('searchInput').addEventListener('keypress', (e) => {
