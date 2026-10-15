@@ -289,7 +289,6 @@
       border: 1px solid var(--border);
     }
 
-    /* Sticky Bottom Audio Bar */
     .audio-dock {
       position: fixed;
       bottom: 0;
@@ -315,11 +314,13 @@
       align-items: center;
       justify-content: space-between;
       gap: 10px;
+      flex-wrap: wrap;
     }
 
     .dock-status-box {
       overflow: hidden;
       flex: 1;
+      min-width: 180px;
     }
 
     .audio-status {
@@ -430,7 +431,6 @@
   </div>
 </div>
 
-<!-- Sticky Bottom Audio Player -->
 <div class="audio-dock">
   <div class="dock-inner">
     <div class="dock-top">
@@ -463,7 +463,6 @@
 </div>
 
 <script>
-  // Automatically uses your live Vercel server if you preview inside Acode!
   const API_BASE = window.location.hostname.includes('vercel.app')
     ? ''
     : 'https://automatic-summaries-news.vercel.app';
@@ -472,7 +471,6 @@
   let fetchedArticles = [];
   let fetchController = null;
 
-  // Real HTML5 Audio Player for Natural Human Voice
   const audioPlayer = new Audio();
   let playQueue = [];
   let currentQueuePos = -1;
@@ -503,7 +501,6 @@
       .trim();
   }
 
-  // Split long text into natural <180 char phrases for seamless human voice streaming
   function splitIntoChunks(text) {
     const words = cleanText(text).split(' ');
     const chunks = [];
@@ -541,7 +538,6 @@
     });
   }
 
-  // INSTANT STOP FUNCTION
   function stopAudio() {
     isPlaying = false;
     playQueue = [];
@@ -549,7 +545,6 @@
     sentenceChunks = [];
     currentChunkIndex = 0;
 
-    // Immediately stop HTML5 Audio & any fallback speech
     audioPlayer.pause();
     audioPlayer.removeAttribute('src');
     if (window.speechSynthesis) window.speechSynthesis.cancel();
@@ -589,7 +584,6 @@
     if (!isPlaying) return;
 
     if (currentChunkIndex >= sentenceChunks.length) {
-      // Move to next article in queue
       if (currentQueuePos + 1 < playQueue.length) {
         currentQueuePos++;
         playArticleAtQueuePos();
@@ -604,12 +598,10 @@
     const chunkText = sentenceChunks[currentChunkIndex];
     const accent = document.getElementById('voiceAccent').value || 'en-IN';
 
-    // Stream human voice MP3 from /api/tts
     audioPlayer.src = `${API_BASE}/api/tts?tl=${encodeURIComponent(accent)}&text=${encodeURIComponent(chunkText)}`;
     audioPlayer.playbackRate = playbackSpeed;
 
     audioPlayer.play().catch(() => {
-      // Fallback if /api/tts isn't deployed to Vercel yet
       fallbackVoice(chunkText, accent);
     });
   }
@@ -627,7 +619,6 @@
     fallbackVoice(chunkText, accent);
   };
 
-  // Fallback only if user hasn't uploaded api/tts.js yet
   function fallbackVoice(text, lang) {
     if (!window.speechSynthesis) {
       stopAudio();
@@ -769,6 +760,10 @@
     const q = document.getElementById('searchInput').value.trim();
     if (q) fetchNews(q);
   }
+
+  document.getElementById('searchInput').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') triggerSearch();
+  });
 
   fetchNews();
 </script>
